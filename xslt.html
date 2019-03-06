@@ -7,18 +7,18 @@
 <style type="text/css">
 .underline { text-decoration: underline; }
 </style>
-<link rel="stylesheet" href="file:///home/laurencio/reveal.js/css/reveal.css"/>
+<link rel="stylesheet" href="./css/reveal.css"/>
 
-<link rel="stylesheet" href="file:///home/laurencio/reveal.js/css/theme/bosch.css" id="theme"/>
+<link rel="stylesheet" href="./css/theme/bosch.css" id="theme"/>
 
-<link rel="stylesheet" href="file:///home/laurencio/reveal.js/lib/css/zenburn.css"/>
+<link rel="stylesheet" href="./lib/css/zenburn.css"/>
 <!-- If the query includes 'print-pdf', include the PDF print sheet -->
 <script>
     if( window.location.search.match( /print-pdf/gi ) ) {
         var link = document.createElement( 'link' );
         link.rel = 'stylesheet';
         link.type = 'text/css';
-        link.href = 'file:///home/laurencio/reveal.js/css/print/pdf.css';
+        link.href = './css/print/pdf.css';
         document.getElementsByTagName( 'head' )[0].appendChild( link );
     }
 </script>
@@ -27,12 +27,12 @@
 <div class="reveal">
 <div class="slides">
 <section id="sec-title-slide">
-<h1 class="title">xslt:stylesheet</h1><h2 class="author">Laurencio Alan García Vargas C/IDI1-MX</h2><p class="date">Created: 2019-03-06 mié 12:31</p>
+<h1 class="title">xslt:stylesheet</h1><h2 class="author">Laurencio Alan García Vargas C/IDI1-MX</h2><p class="date">Created: 2019-03-06 mié 14:01</p>
 </section>
 
 <section>
-<section id="slide-org0d6a236">
-<h2 id="org0d6a236">¿Qué es?</h2>
+<section id="slide-orgeedb098">
+<h2 id="orgeedb098">¿Qué es?</h2>
 <ul>
 <li><b>XSL</b> (eXtensible Stylesheet Language)</li>
 
@@ -48,8 +48,8 @@ Un lenguaje de estilos para XML
 </section>
 </section>
 <section>
-<section id="slide-org4a3b022">
-<h2 id="org4a3b022">¿Cómo funciona?</h2>
+<section id="slide-orgdd97b09">
+<h2 id="orgdd97b09">¿Cómo funciona?</h2>
 
 <div class="figure">
 <p><img src="./images/xslt.png" alt="xslt.png" />
@@ -58,8 +58,8 @@ Un lenguaje de estilos para XML
 </section>
 </section>
 <section>
-<section id="slide-org0008cf4">
-<h2 id="org0008cf4">Nuestro XSL Processor</h2>
+<section id="slide-orgbd25c51">
+<h2 id="orgbd25c51">Nuestro XSL Processor</h2>
 <p>
 <b>ServiceMix</b> = Apache Karaf + (Basic) Camel Bundles
 </p>
@@ -73,8 +73,8 @@ Un lenguaje de estilos para XML
 <i>bundle</i> : Empaquetado de código java - mvn
 </p>
 </section>
-<section id="slide-orge22665a">
-<h3 id="orge22665a">Iniciando Servicemix</h3>
+<section id="slide-org18c3f51">
+<h3 id="org18c3f51">Iniciando Servicemix</h3>
 <div class="org-src-container">
 
 <pre><code class="" sh >cd $SMX_HOME
@@ -84,8 +84,8 @@ Un lenguaje de estilos para XML
 </code></pre>
 </div>
 </section>
-<section id="slide-org6642168">
-<h3 id="org6642168">Comandos Básicos</h3>
+<section id="slide-orgc068c43">
+<h3 id="orgc068c43">Comandos Básicos</h3>
 <div class="org-src-container">
 
 <pre><code class="" sh >#Bundles
@@ -103,8 +103,8 @@ feature:install camel-xslt
 </section>
 </section>
 <section>
-<section id="slide-org5cd851d">
-<h2 id="org5cd851d">Mr. Apache Camel</h2>
+<section id="slide-org36a6099">
+<h2 id="org36a6099">Mr. Apache Camel</h2>
 
 <div class="figure">
 <p><img src="./images/camelcontext001.png" alt="camelcontext001.png" />
@@ -113,16 +113,16 @@ feature:install camel-xslt
 </section>
 </section>
 <section>
-<section id="slide-orgb5fc27e">
-<h2 id="orgb5fc27e">Camel Round 01</h2>
+<section id="slide-org1a88517">
+<h2 id="org1a88517">Camel Round 01</h2>
 
 <div class="figure">
 <p><img src="./images/task001.png" alt="task001.png" />
 </p>
 </div>
 </section>
-<section id="slide-orgf079880">
-<h3 id="orgf079880">Camel Round 01</h3>
+<section id="slide-org846742c">
+<h3 id="org846742c">Camel Round 01</h3>
 <div class="org-src-container">
 
 <pre><code class="" xml ><?xml version="1.0" encoding="UTF-8"?>
@@ -143,47 +143,64 @@ feature:install camel-xslt
 </code></pre>
 </div>
 </section>
-</section>
-<section>
-<section id="slide-orgd9d92b5">
-<h2 id="orgd9d92b5">Camel concepts</h2>
-<div class="outline-text-2" id="text-orgd9d92b5">
+<section id="slide-orgdb643b5">
+<h3 id="orgdb643b5">Logs</h3>
+<div class="org-src-container">
+
+<pre><code class="" xml ><log message="processing: ${header.CamelFileName}"/>
+</code></pre>
 </div>
 </section>
-<section id="slide-orgf9d77f5">
-<h3 id="orgf9d77f5">Sender/Receiver</h3>
+<section id="slide-orga30693e">
+<h3 id="orga30693e">fileName (Producer)</h3>
+<div class="org-src-container">
+
+<pre><code class="" xml ><to uri="file:xml/output?fileName=artist.csv"/>
+</code></pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orgf1fdf26">
+<h2 id="orgf1fdf26">Camel concepts</h2>
+<div class="outline-text-2" id="text-orgf1fdf26">
+</div>
+</section>
+<section id="slide-orgb7f2ed7">
+<h3 id="orgb7f2ed7">Sender/Receiver</h3>
 
 <div class="figure">
 <p><img src="./images/message_001.png" alt="message_001.png" />
 </p>
 </div>
 </section>
-<section id="slide-org0559052">
-<h3 id="org0559052">Message</h3>
+<section id="slide-org30aaa55">
+<h3 id="org30aaa55">Message</h3>
 
 <div class="figure">
 <p><img src="./images/message_002.png" alt="message_002.png" />
 </p>
 </div>
 </section>
-<section id="slide-org3612ae0">
-<h3 id="org3612ae0">Exchange</h3>
+<section id="slide-org0c1fdba">
+<h3 id="org0c1fdba">Exchange</h3>
 
 <div class="figure">
 <p><img src="./images/exchange_001.png" alt="exchange_001.png" />
 </p>
 </div>
 </section>
-<section id="slide-org790c4b6">
-<h3 id="org790c4b6">Endpoint</h3>
+<section id="slide-org63f68f3">
+<h3 id="org63f68f3">Endpoint</h3>
 
 <div class="figure">
 <p><img src="./images/endpoint.png" alt="endpoint.png" />
 </p>
 </div>
 </section>
-<section id="slide-orgfdcbc38">
-<h3 id="orgfdcbc38">Camel in action</h3>
+<section id="slide-org8f3072d">
+<h3 id="org8f3072d">Camel in action</h3>
 
 <div class="figure">
 <p><img src="./images/camel_in_action.png" alt="camel_in_action.png" />
@@ -192,14 +209,14 @@ feature:install camel-xslt
 </section>
 </section>
 <section>
-<section id="slide-orga7d0ae6">
-<h2 id="orga7d0ae6">Camel Round 02</h2>
+<section id="slide-org1c43c6a">
+<h2 id="org1c43c6a">Camel Round 02</h2>
 <p>
 XML1 &#x2013;&gt; XML2
 </p>
 </section>
-<section id="slide-org0698505">
-<h3 id="org0698505">XML1</h3>
+<section id="slide-org6449851">
+<h3 id="org6449851">XML1</h3>
 <div class="org-src-container">
 
 <pre><code class="" xml ><?xml version="1.0" encoding="UTF-8"?>
@@ -217,8 +234,8 @@ XML1 &#x2013;&gt; XML2
 </code></pre>
 </div>
 </section>
-<section id="slide-org28f2bab">
-<h3 id="org28f2bab">XML2</h3>
+<section id="slide-orgedc88a5">
+<h3 id="orgedc88a5">XML2</h3>
 <div class="org-src-container">
 
 <pre><code class="" xml ><?xml version="1.0" encoding="UTF-8"?>
@@ -234,8 +251,8 @@ XML1 &#x2013;&gt; XML2
 </div>
 
 </section>
-<section id="slide-org0be6e36">
-<h3 id="org0be6e36">XPATH</h3>
+<section id="slide-org4689b09">
+<h3 id="org4689b09">XPATH</h3>
 <p>
 <b>XPath</b> can be used to navigate through elements and attributes in an XML document.
 </p>
@@ -251,13 +268,13 @@ XML1 &#x2013;&gt; XML2
 </section>
 </section>
 <section>
-<section id="slide-org71a01be">
-<h2 id="org71a01be">XSL in action</h2>
-<div class="outline-text-2" id="text-org71a01be">
+<section id="slide-org27109eb">
+<h2 id="org27109eb">XSL in action</h2>
+<div class="outline-text-2" id="text-org27109eb">
 </div>
 </section>
-<section id="slide-orgd6afafb">
-<h3 id="orgd6afafb">XSL template</h3>
+<section id="slide-orgb741bae">
+<h3 id="orgb741bae">XSL template</h3>
 <div class="org-src-container">
 
 <pre><code class="" xml ><?xml version="1.0" encoding="UTF-8"?>
@@ -272,8 +289,8 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 </code></pre>
 </div>
 </section>
-<section id="slide-orgf7b3504">
-<h3 id="orgf7b3504">XSLT for-each</h3>
+<section id="slide-org5b83de1">
+<h3 id="org5b83de1">XSLT for-each</h3>
 <div class="org-src-container">
 
 <pre><code class="" xml ><xsl:for-each select="//node">
@@ -282,8 +299,8 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 </code></pre>
 </div>
 </section>
-<section id="slide-orga778aac">
-<h3 id="orga778aac">XSLT if</h3>
+<section id="slide-org20f9172">
+<h3 id="org20f9172">XSLT if</h3>
 <div class="org-src-container">
 
 <pre><code class="" xml ><xsl:if test="/catalog/@id='master'">
@@ -293,8 +310,8 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 </code></pre>
 </div>
 </section>
-<section id="slide-org38b01a3">
-<h3 id="org38b01a3">XSLT choose</h3>
+<section id="slide-org4f0732d">
+<h3 id="org4f0732d">XSLT choose</h3>
 <div class="org-src-container">
 
 <pre><code class="" xml ><xsl:choose>
@@ -308,23 +325,23 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 </code></pre>
 </div>
 </section>
-<section id="slide-orge1b1e68">
-<h3 id="orge1b1e68">XSLT Variables</h3>
+<section id="slide-org46c6152">
+<h3 id="org46c6152">XSLT Variables</h3>
 <div class="org-src-container">
 
 <pre><code class="" xml ><xsl:variable name="owner" select="Mario"/>
 </code></pre>
 </div>
 </section>
-<section id="slide-org1252cbf">
-<h3 id="org1252cbf">XSLT Build-in functions</h3>
+<section id="slide-org27e9678">
+<h3 id="org27e9678">XSLT Build-in functions</h3>
 <ul>
 <li><a href="http://zvon.org/xxl/XSLTreference/Output/xpathFunctionIndex.html">Reference</a></li>
 
 </ul>
 </section>
-<section id="slide-org3f2b041">
-<h3 id="org3f2b041">XSLT Cleaning by xsl:call-template</h3>
+<section id="slide-org38fb25c">
+<h3 id="org38fb25c">XSLT Cleaning by xsl:call-template</h3>
 <div class="org-src-container">
 
 <pre><code class="" xml ><xsl:template match="/">
@@ -344,8 +361,8 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 </code></pre>
 </div>
 </section>
-<section id="slide-org9396852">
-<h3 id="org9396852">XSLT for csv</h3>
+<section id="slide-org694c67b">
+<h3 id="org694c67b">XSLT for csv</h3>
 <div class="org-src-container">
 
 <pre><code class="" xml ><?xml version="1.0" encoding="UTF-8"?>
@@ -361,33 +378,10 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 </div>
 </section>
 </section>
-<section>
-<section id="slide-org6b3c972">
-<h2 id="org6b3c972">Back in  Camel</h2>
-<div class="outline-text-2" id="text-org6b3c972">
-</div>
-</section>
-<section id="slide-org006fa07">
-<h3 id="org006fa07">Logs</h3>
-<div class="org-src-container">
-
-<pre><code class="" xml ><log message="processing: ${header.CamelFileName}"/>
-</code></pre>
-</div>
-</section>
-<section id="slide-orgf4958ca">
-<h3 id="orgf4958ca">fileName (Producer)</h3>
-<div class="org-src-container">
-
-<pre><code class="" xml ><to uri="file:xml/output?fileName=artist.csv"/>
-</code></pre>
-</div>
-</section>
-</section>
 </div>
 </div>
-<script src="file:///home/laurencio/reveal.js/lib/js/head.min.js"></script>
-<script src="file:///home/laurencio/reveal.js/js/reveal.js"></script>
+<script src="./lib/js/head.min.js"></script>
+<script src="./js/reveal.js"></script>
 <script>
 // Full list of configuration options available here:
 // https://github.com/hakimel/reveal.js#configuration
@@ -417,7 +411,7 @@ multiplex: {
 
 // Optional libraries used to extend on reveal.js
 dependencies: [
- { src: 'file:///home/laurencio/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }]
+ { src: './plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }]
 });
 </script>
 </body>
